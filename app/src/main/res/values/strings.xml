@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Diary</string>
+    <string name="to_do">ToDo</string>
 </resources>
