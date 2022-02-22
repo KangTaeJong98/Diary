@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_round_all_inbox_24.xml" value="0.217" />
         <entry key="app/src/main/res/drawable/ic_round_check_24.xml" value="0.217" />
       </map>
     </option>

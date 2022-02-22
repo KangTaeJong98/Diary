@@ -1,13 +1,18 @@
 package com.taetae98.diary.ui.screen
 
+import android.util.Log
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.taetae98.diary.prodocol.NavigationScreen
 
@@ -17,7 +22,7 @@ fun MainScreen(
     navController: NavHostController = rememberNavController()
 ) {
     val screenList = listOf(
-        ToDoScreen
+        ToDoScreen, DrawerScreen
     )
 
     Scaffold(
@@ -48,7 +53,8 @@ private fun BottomNavigation(
     screenList: List<NavigationScreen>,
     navController: NavHostController
 ) {
-    val currentRoute = navController.currentBackStackEntry?.destination?.route
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
 
     BottomNavigation {
         screenList.forEach { screen ->
@@ -64,8 +70,10 @@ private fun BottomNavigation(
                 label = { Text(text = stringResource(id = screen.labelRes)) },
                 selected = screen.route == currentRoute,
                 onClick = {
-                    if (screen.route != currentRoute) {
-                        navController.navigate(screen.route)
+                    navController.navigate(screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id)
+                        launchSingleTop = true
+                        restoreState = true
                     }
                 }
             )
