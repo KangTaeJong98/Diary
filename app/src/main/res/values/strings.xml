@@ -3,4 +3,5 @@
     <string name="to_do">ToDo</string>
     <string name="drawer">Drawer</string>
     <string name="calendar">Calendar</string>
+    <string name="routine">Routine</string>
 </resources>
