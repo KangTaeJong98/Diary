@@ -22,7 +22,7 @@ fun MainScreen(
     navController: NavHostController = rememberNavController()
 ) {
     val screenList = listOf(
-        ToDoScreen, DrawerScreen
+        ToDoScreen, DrawerScreen, CalendarScreen, RoutineScreen, MoreScreen
     )
 
     Scaffold(
@@ -67,7 +67,10 @@ private fun BottomNavigation(
                         )
                     )
                 },
-                label = { Text(text = stringResource(id = screen.labelRes)) },
+                label = {
+                    Text(text = stringResource(id = screen.labelRes))
+                },
+                alwaysShowLabel = false,
                 selected = screen.route == currentRoute,
                 onClick = {
                     navController.navigate(screen.route) {
